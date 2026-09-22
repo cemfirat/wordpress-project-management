@@ -1,0 +1,579 @@
+{
+    "key": "group_ambra_position",
+    "title": "AMBRA – Auftragsposition",
+    "fields": [
+        {
+            "key": "field_ambra_position_project",
+            "label": "Auftrag",
+            "name": "ambra_position_project",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "ambra_project"
+            ],
+            "post_status": [
+                "private"
+            ],
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_ambra_position_visit",
+            "label": "Erfasst / gemessen bei Besichtigung",
+            "name": "ambra_position_visit",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "ambra_visit"
+            ],
+            "post_status": [
+                "private"
+            ],
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 1,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_ambra_position_number",
+            "label": "Positionsnummer",
+            "name": "ambra_position_number",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 1,
+            "max": "",
+            "step": 1
+        },
+        {
+            "key": "field_ambra_position_label",
+            "label": "Bezeichnung",
+            "name": "ambra_position_label",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "z. B. Küchenfenster oder Terrassentür",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_ambra_position_room",
+            "label": "Bereich / Raum",
+            "name": "ambra_position_room",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_ambra_quantity",
+            "label": "Menge",
+            "name": "ambra_quantity",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 1,
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 0.01,
+            "max": "",
+            "step": "0.01"
+        },
+        {
+            "key": "field_ambra_position_width",
+            "label": "Breite",
+            "name": "ambra_width_mm",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": "mm",
+            "min": 0,
+            "max": "",
+            "step": "1"
+        },
+        {
+            "key": "field_ambra_position_height",
+            "label": "Höhe",
+            "name": "ambra_height_mm",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": "mm",
+            "min": 0,
+            "max": "",
+            "step": "1"
+        },
+        {
+            "key": "field_ambra_position_photos",
+            "label": "Positionsfotos",
+            "name": "ambra_position_photos",
+            "aria-label": "",
+            "type": "gallery",
+            "instructions": "Fotos des konkreten Fensters, der Tür oder Einbausituation.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "library": "all",
+            "min": 0,
+            "max": 0,
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": "",
+            "insert": "append",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_ambra_position_notes",
+            "label": "Notizen / technische Hinweise",
+            "name": "ambra_position_notes",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": 4,
+            "placeholder": "",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_ambra_position_blueprint",
+            "label": "Produkt-Blueprint",
+            "name": "ambra_position_blueprint",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "Kann bei der ersten Besichtigung noch leer bleiben.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "ambra_blueprint"
+            ],
+            "post_status": [
+                "private"
+            ],
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 1,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_ambra_position_manufacturer",
+            "label": "Hersteller-Snapshot",
+            "name": "ambra_manufacturer_snapshot",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "ambra_manufacturer"
+            ],
+            "post_status": [
+                "private"
+            ],
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 1,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_ambra_position_config",
+            "label": "Produktkonfiguration",
+            "name": "ambra_position_configuration",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Wird aus dem Blueprint übernommen und kann vor Angebotsversand angepasst werden.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Eintrag hinzufügen",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_ambra_position_config_label",
+                    "label": "Merkmal",
+                    "name": "ambra_position_config_label",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_ambra_position_config"
+                },
+                {
+                    "key": "field_ambra_position_config_key",
+                    "label": "Interner Schlüssel",
+                    "name": "ambra_position_config_key",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_ambra_position_config"
+                },
+                {
+                    "key": "field_ambra_position_config_value",
+                    "label": "Wert",
+                    "name": "ambra_position_config_value",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_ambra_position_config"
+                }
+            ]
+        },
+        {
+            "key": "field_ambra_manual_override",
+            "label": "Verkaufspreis manuell überschreiben",
+            "name": "ambra_manual_price_override",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Aktivieren, wenn der automatisch kalkulierte Preis nicht verwendet werden soll.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "Ja",
+            "ui_off_text": "Nein",
+            "ui": 1
+        },
+        {
+            "key": "field_ambra_internal_snapshot",
+            "label": "Interner Preis-Snapshot",
+            "name": "ambra_internal_cost_snapshot",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": "€",
+            "min": 0,
+            "max": "",
+            "step": "0.01"
+        },
+        {
+            "key": "field_ambra_markup_snapshot",
+            "label": "Aufschlag-Snapshot",
+            "name": "ambra_markup_snapshot",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": "%",
+            "min": "",
+            "max": "",
+            "step": "0.01"
+        },
+        {
+            "key": "field_ambra_price_model_snapshot",
+            "label": "Preismodell-Snapshot",
+            "name": "ambra_price_model_snapshot",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_ambra_sale_unit",
+            "label": "Verkaufspreis je Einheit",
+            "name": "ambra_sale_unit_price",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Wird automatisch berechnet. Für einen manuellen Preis zuerst die Überschreibung aktivieren.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": "€",
+            "min": 0,
+            "max": "",
+            "step": "0.01"
+        },
+        {
+            "key": "field_ambra_line_total",
+            "label": "Positionssumme",
+            "name": "ambra_line_total",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": "€",
+            "min": 0,
+            "max": "",
+            "step": "0.01"
+        },
+        {
+            "key": "field_ambra_position_status",
+            "label": "Positionsstatus",
+            "name": "ambra_position_status",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Wird durch Kalkulation und Workflow-Aktionen geändert.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "recorded": "Erfasst",
+                "calculated": "Kalkuliert",
+                "ordered": "Bestellt",
+                "delivered": "Geliefert",
+                "installed": "Montiert",
+                "cancelled": "Storniert"
+            },
+            "default_value": "recorded",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "ambra_position"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1787080000
+}

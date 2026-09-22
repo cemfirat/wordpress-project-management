@@ -1,0 +1,661 @@
+{
+    "key": "group_ambra_project",
+    "title": "AMBRA – Auftrag",
+    "fields": [
+        {
+            "key": "field_ambra_project_number",
+            "label": "Auftragsnummer",
+            "name": "ambra_project_number",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Wird automatisch erzeugt.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_ambra_project_title",
+            "label": "Auftrag / Projekttitel",
+            "name": "ambra_project_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_ambra_project_customer",
+            "label": "Kunde",
+            "name": "ambra_project_customer",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "ambra_customer"
+            ],
+            "post_status": [
+                "private"
+            ],
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_ambra_project_team",
+            "label": "Teammitglieder",
+            "name": "ambra_project_team",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "ambra_team"
+            ],
+            "post_status": [
+                "private"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "return_format": "id",
+            "min": 0,
+            "max": 0,
+            "allow_in_bindings": 0,
+            "elements": "",
+            "bidirectional": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_ambra_project_manufacturers",
+            "label": "Hersteller",
+            "name": "ambra_project_manufacturers",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "ambra_manufacturer"
+            ],
+            "post_status": [
+                "private"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "return_format": "id",
+            "min": 0,
+            "max": 0,
+            "allow_in_bindings": 0,
+            "elements": "",
+            "bidirectional": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_ambra_project_suppliers",
+            "label": "Lieferanten / Transport",
+            "name": "ambra_project_suppliers",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "ambra_supplier"
+            ],
+            "post_status": [
+                "private"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "return_format": "id",
+            "min": 0,
+            "max": 0,
+            "allow_in_bindings": 0,
+            "elements": "",
+            "bidirectional": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_ambra_project_stage",
+            "label": "Aktuelle Etappe",
+            "name": "ambra_project_stage",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Wird ausschließlich durch den Workflow geändert.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "inquiry": "Kundenanfrage erhalten",
+                "appointment_scheduled": "Besichtigungstermin vereinbart",
+                "visit_completed": "Besichtigung / Aufmaß durchgeführt",
+                "positions_ready": "Positionen kalkuliert",
+                "quote_sent": "Angebot gesendet",
+                "quote_accepted": "Angebot angenommen",
+                "deposit_invoice_sent": "Anzahlungsrechnung gesendet",
+                "deposit_paid": "Anzahlung eingegangen",
+                "ordered": "Beim Hersteller bestellt",
+                "delivered": "Lieferung vollständig",
+                "installation_scheduled": "Montagetermin vereinbart",
+                "installed": "Montage durchgeführt",
+                "final_invoice_sent": "Schlussrechnung gesendet",
+                "final_paid": "Restzahlung eingegangen",
+                "completed": "Abgeschlossen"
+            },
+            "default_value": "inquiry",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_ambra_project_state",
+            "label": "Auftragsstatus",
+            "name": "ambra_project_state",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "active": "Aktiv",
+                "cancelled": "Beendet / Abgebrochen",
+                "completed": "Abgeschlossen"
+            },
+            "default_value": "active",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_ambra_project_notes",
+            "label": "Interne Notizen",
+            "name": "ambra_project_notes",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": 4,
+            "placeholder": "",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_ambra_quote_number",
+            "label": "Angebotsnummer",
+            "name": "ambra_quote_number",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_ambra_quote_file",
+            "label": "Angebot PDF",
+            "name": "ambra_quote_file",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "Optional: extern erstelltes Angebot als PDF hochladen.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "library": "all",
+            "min_size": 0,
+            "max_size": 0,
+            "mime_types": "pdf"
+        },
+        {
+            "key": "field_ambra_quote_sent_at",
+            "label": "Angebot gesendet am",
+            "name": "ambra_quote_sent_at",
+            "aria-label": "",
+            "type": "date_time_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d.m.Y H:i",
+            "return_format": "Y-m-d H:i:s",
+            "first_day": 1
+        },
+        {
+            "key": "field_ambra_quote_decision",
+            "label": "Angebotsentscheidung",
+            "name": "ambra_quote_decision",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "pending": "Offen",
+                "accepted": "Angenommen",
+                "rejected": "Abgelehnt"
+            },
+            "default_value": "pending",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_ambra_quote_decision_at",
+            "label": "Angebotsentscheidung am",
+            "name": "ambra_quote_decision_at",
+            "aria-label": "",
+            "type": "date_time_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d.m.Y H:i",
+            "return_format": "Y-m-d H:i:s",
+            "first_day": 1
+        },
+        {
+            "key": "field_ambra_deposit_invoice_number",
+            "label": "Anzahlungsrechnung Nr.",
+            "name": "ambra_deposit_invoice_number",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_ambra_deposit_invoice_file",
+            "label": "Anzahlungsrechnung PDF",
+            "name": "ambra_deposit_invoice_file",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "library": "all",
+            "min_size": 0,
+            "max_size": 0,
+            "mime_types": "pdf"
+        },
+        {
+            "key": "field_ambra_deposit_amount",
+            "label": "Anzahlungsbetrag",
+            "name": "ambra_deposit_amount",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": "€",
+            "min": 0,
+            "max": "",
+            "step": "0.01"
+        },
+        {
+            "key": "field_ambra_deposit_invoice_sent_at",
+            "label": "Anzahlungsrechnung gesendet am",
+            "name": "ambra_deposit_invoice_sent_at",
+            "aria-label": "",
+            "type": "date_time_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d.m.Y H:i",
+            "return_format": "Y-m-d H:i:s",
+            "first_day": 1
+        },
+        {
+            "key": "field_ambra_deposit_paid_at",
+            "label": "Anzahlung eingegangen am",
+            "name": "ambra_deposit_paid_at",
+            "aria-label": "",
+            "type": "date_time_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d.m.Y H:i",
+            "return_format": "Y-m-d H:i:s",
+            "first_day": 1
+        },
+        {
+            "key": "field_ambra_ordered_at",
+            "label": "Bestellt am",
+            "name": "ambra_ordered_at",
+            "aria-label": "",
+            "type": "date_time_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d.m.Y H:i",
+            "return_format": "Y-m-d H:i:s",
+            "first_day": 1
+        },
+        {
+            "key": "field_ambra_installation_datetime",
+            "label": "Montagetermin",
+            "name": "ambra_installation_datetime",
+            "aria-label": "",
+            "type": "date_time_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d.m.Y H:i",
+            "return_format": "Y-m-d H:i:s",
+            "first_day": 1
+        },
+        {
+            "key": "field_ambra_final_invoice_number",
+            "label": "Schlussrechnung Nr.",
+            "name": "ambra_final_invoice_number",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_ambra_final_invoice_file",
+            "label": "Schlussrechnung PDF",
+            "name": "ambra_final_invoice_file",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "library": "all",
+            "min_size": 0,
+            "max_size": 0,
+            "mime_types": "pdf"
+        },
+        {
+            "key": "field_ambra_final_amount",
+            "label": "Restbetrag",
+            "name": "ambra_final_amount",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": "€",
+            "min": 0,
+            "max": "",
+            "step": "0.01"
+        },
+        {
+            "key": "field_ambra_final_invoice_sent_at",
+            "label": "Schlussrechnung gesendet am",
+            "name": "ambra_final_invoice_sent_at",
+            "aria-label": "",
+            "type": "date_time_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d.m.Y H:i",
+            "return_format": "Y-m-d H:i:s",
+            "first_day": 1
+        },
+        {
+            "key": "field_ambra_final_paid_at",
+            "label": "Restzahlung eingegangen am",
+            "name": "ambra_final_paid_at",
+            "aria-label": "",
+            "type": "date_time_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d.m.Y H:i",
+            "return_format": "Y-m-d H:i:s",
+            "first_day": 1
+        },
+        {
+            "key": "field_ambra_cancel_reason",
+            "label": "Abbruch- / Ablehnungsgrund",
+            "name": "ambra_cancellation_reason",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": 4,
+            "placeholder": "",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_ambra_completed_at",
+            "label": "Abgeschlossen am",
+            "name": "ambra_completed_at",
+            "aria-label": "",
+            "type": "date_time_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d.m.Y H:i",
+            "return_format": "Y-m-d H:i:s",
+            "first_day": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "ambra_project"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1787080000
+}

@@ -1,0 +1,88 @@
+.ambra-pm {
+    width: 100%;
+}
+
+.ambra-pm .ambra-step {
+    border: 1px solid rgba(0, 0, 0, .12);
+    height: 100%;
+}
+
+.ambra-pm .ambra-step-done {
+    opacity: .72;
+}
+
+.ambra-pm .ambra-step-current {
+    border-width: 2px;
+}
+
+.ambra-pm .acf-form {
+    margin: 0;
+}
+
+.ambra-pm .acf-fields > .acf-field {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.ambra-pm .acf-field .acf-label {
+    margin-bottom: 6px;
+}
+
+.ambra-pm .acf-field .description {
+    margin-top: 5px;
+}
+
+.ambra-pm .acf-form-submit {
+    margin-top: 30px;
+}
+
+.ambra-pm .select2-container {
+    width: 100% !important;
+}
+
+.ambra-pm .acf-repeater,
+.ambra-pm .acf-gallery,
+.ambra-pm .acf-file-uploader,
+.ambra-pm .acf-image-uploader {
+    max-width: 100%;
+}
+
+@media (max-width: 639px) {
+    .ambra-pm .uk-heading-medium {
+        font-size: 2rem;
+    }
+
+    .ambra-pm .uk-card-body {
+        padding: 20px;
+    }
+}
+
+/* Frontend login ---------------------------------------------------------- */
+.ambra-login {
+    width: 100%;
+}
+
+.ambra-login .ambra-login-card {
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ambra-login .uk-form-icon {
+    pointer-events: none;
+}
+
+.ambra-login .uk-alert p:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 639px) {
+    .ambra-login {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .ambra-login .ambra-login-card {
+        padding: 24px;
+    }
+}
