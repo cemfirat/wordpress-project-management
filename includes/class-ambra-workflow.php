@@ -53,7 +53,8 @@ final class Workflow {
         return $keys[ $index + 1 ];
     }
 
-    public static function validate_transition( int $project_id, string $target ): true|string {
+    /** @return true|string True on success, otherwise a validation message. */
+    public static function validate_transition( int $project_id, string $target ): bool|string {
         $current = (string) Utils::field( 'ambra_project_stage', $project_id, 'inquiry' );
         $state   = (string) Utils::field( 'ambra_project_state', $project_id, 'active' );
 
