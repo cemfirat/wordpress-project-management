@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.svg" alt="Cem Firat logo" width="120" />
+</p>
+
 # AMBRA Projektmanagement 2.0.2
 
 Geschlossene, frontend-basierte WordPress-Anwendung für AMBRA mit eigener UIkit-Loginseite.
