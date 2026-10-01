@@ -30,7 +30,38 @@ def parse_version(source_root: Path) -> str:
     if not re.fullmatch(r"[0-9]+(?:\.[0-9]+){1,3}(?:[-+][0-9A-Za-z.-]+)?", version):
         raise SystemExit(f"Unexpected plugin version format: {version}")
 
+    runtime = re.search(
+        r"define\(\s*['\"]AMBRA_PM_VERSION['\"]\s*,\s*['\"]([^'\"]+)['\"]\s*\);",
+        text,
+    )
+    if not runtime:
+        raise SystemExit("Could not read AMBRA_PM_VERSION from plugin main file.")
+
+    runtime_version = runtime.group(1).strip()
+    if runtime_version != version:
+        raise SystemExit(
+            "Plugin version mismatch: "
+            f"header={version}, AMBRA_PM_VERSION={runtime_version}"
+        )
+
     return version
+
+
+def has_unreleased_changes(source_root: Path) -> bool:
+    changelog = source_root / "CHANGELOG.md"
+    if not changelog.is_file():
+        return False
+
+    text = changelog.read_text(encoding="utf-8")
+    match = re.search(
+        r"^## Unreleased\s*$([\s\S]*?)(?=^##\s|\Z)",
+        text,
+        re.MULTILINE,
+    )
+    if not match:
+        return False
+
+    return any(line.strip().startswith("- ") for line in match.group(1).splitlines())
 
 
 def collect_files(source_root: Path) -> list[Path]:
@@ -145,13 +176,28 @@ def main() -> int:
     parser.add_argument(
         "--output",
         type=Path,
-        help="Output ZIP path. Defaults to dist/<slug>-<version>.zip.",
+        help="Output ZIP path. Defaults to a versioned dev/release filename under dist/.",
+    )
+    parser.add_argument(
+        "--release",
+        action="store_true",
+        help="Build an official-version package. Refuses while CHANGELOG.md has Unreleased entries.",
     )
     args = parser.parse_args()
 
     source_root = Path(__file__).resolve().parent.parent
     version = parse_version(source_root)
-    output = args.output or source_root / "dist" / f"{PLUGIN_SLUG}-{version}.zip"
+    unreleased = has_unreleased_changes(source_root)
+
+    if args.release and unreleased:
+        raise SystemExit(
+            "Release build blocked: CHANGELOG.md still contains Unreleased changes. "
+            "Choose the release version, move those entries under it, and update both "
+            "the plugin header and AMBRA_PM_VERSION first."
+        )
+
+    default_suffix = "" if args.release or not unreleased else "-dev"
+    output = args.output or source_root / "dist" / f"{PLUGIN_SLUG}-{version}{default_suffix}.zip"
 
     files = collect_files(source_root)
     write_deterministic_zip(source_root, output, files)
@@ -159,6 +205,8 @@ def main() -> int:
 
     print(f"Built {output}")
     print(f"Version: {version}")
+    print(f"Mode: {'release' if args.release else 'development'}")
+    print(f"Unreleased changes: {'yes' if unreleased else 'no'}")
     print(f"Files: {len(files)}")
     print(f"SHA256: {sha256(output)}")
     return 0

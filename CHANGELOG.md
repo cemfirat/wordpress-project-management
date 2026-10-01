@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+- Server-seitige Workflow-Invarianten gehärtet: Angebotsannahme/-ablehnung kann nicht über generische Workflow-Requests umgangen werden; Positionsstornierungen nach Angebotsversand werden blockiert.
+- Sichtbare Produktbezeichnung über eine zentrale Branding-Grenze von historischen `ambra_*` Speicher-/API-Kennungen getrennt.
+- UIkit-Provider von YOOtheme Pro entkoppelt; YOOtheme bleibt der automatisch erkannte Standard-Provider.
+- AMBRA-/Sonnenschutz-Beispieldaten aus dem wiederverwendbaren Demo-Lifecycle in ein austauschbares Demo-Profil verschoben.
+- Legacy-Kompatibilitätsverträge für gespeicherte IDs, UIkit-Provider, Branding, Demo-Profil und Workflow-Regeln in CI ergänzt.
+- Branch-CI vor Pull Requests verbindlich gemacht.
+- Reproduzierbaren, verifizierten Plugin-ZIP-Build mit deterministischem CI-Doppelbuild ergänzt.
+- Universalisierungs-, Paketierungs- und Distributionsgrenzen dokumentiert; bestehende AMBRA-Datenkennungen bleiben unverändert.
+
 ## 2.0.2
 
 - Eigene Frontend-Loginseite unter `/login/` ergänzt und automatisch angelegt.
