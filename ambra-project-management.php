@@ -28,6 +28,7 @@ require_once AMBRA_PM_DIR . 'includes/class-ambra-records.php';
 require_once AMBRA_PM_DIR . 'includes/class-ambra-team-sync.php';
 require_once AMBRA_PM_DIR . 'includes/class-ambra-pricing.php';
 require_once AMBRA_PM_DIR . 'includes/class-ambra-workflow.php';
+require_once AMBRA_PM_DIR . 'includes/class-ambra-demo-profile.php';
 require_once AMBRA_PM_DIR . 'includes/class-ambra-demo-data.php';
 require_once AMBRA_PM_DIR . 'includes/class-ambra-frontend.php';
 require_once AMBRA_PM_DIR . 'includes/class-ambra-admin.php';
