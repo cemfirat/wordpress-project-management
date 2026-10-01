@@ -53,16 +53,95 @@ final class Workflow {
         return $keys[ $index + 1 ];
     }
 
+
+    /** @return true|string True when the requested project action is valid in the current state. */
+    public static function validate_project_action_context( string $state, string $stage, string $action ): bool|string {
+        if ( 'active' !== $state ) {
+            return 'Der Auftrag ist nicht aktiv.';
+        }
+        if ( self::stage_index( $stage ) < 0 ) {
+            return 'Unbekannter Workflow-Schritt.';
+        }
+
+        switch ( $action ) {
+            case 'cancel':
+                return true;
+
+            case 'accept_quote':
+            case 'reject_quote':
+                return 'quote_sent' === $stage
+                    ? true
+                    : 'Die Angebotsentscheidung ist aktuell nicht zulässig.';
+
+            case 'advance':
+                $target = self::next_stage( $stage );
+                if ( ! $target ) {
+                    return 'Kein weiterer Schritt verfügbar.';
+                }
+                if ( 'quote_accepted' === $target ) {
+                    return 'Das Angebot muss ausdrücklich angenommen oder abgelehnt werden.';
+                }
+                return true;
+        }
+
+        return 'Unbekannte Aktion.';
+    }
+
+    /**
+     * Return server-authoritative position actions for the current project context.
+     *
+     * @return array<string,array{to:string,label:string}>
+     */
+    public static function position_actions( string $project_state, string $project_stage, string $status ): array {
+        if ( 'active' !== $project_state || self::stage_index( $project_stage ) < 0 ) {
+            return array();
+        }
+
+        $actions = array();
+
+        if ( 'ordered' === $status ) {
+            $actions['mark_delivered'] = array(
+                'to'    => 'delivered',
+                'label' => 'Als geliefert markieren',
+            );
+        }
+
+        if ( 'delivered' === $status ) {
+            $actions['mark_installed'] = array(
+                'to'    => 'installed',
+                'label' => 'Als montiert markieren',
+            );
+        }
+
+        if (
+            in_array( $status, array( 'recorded', 'calculated' ), true )
+            && self::stage_index( $project_stage ) < self::stage_index( 'quote_sent' )
+        ) {
+            $actions['cancel'] = array(
+                'to'    => 'cancelled',
+                'label' => 'Position stornieren',
+            );
+        }
+
+        return $actions;
+    }
+
     /** @return true|string True on success, otherwise a validation message. */
     public static function validate_transition( int $project_id, string $target ): bool|string {
         $current = (string) Utils::field( 'ambra_project_stage', $project_id, 'inquiry' );
         $state   = (string) Utils::field( 'ambra_project_state', $project_id, 'active' );
 
+        if ( self::stage_index( $current ) < 0 || self::stage_index( $target ) < 0 ) {
+            return 'Unbekannter Workflow-Schritt.';
+        }
         if ( 'active' !== $state ) {
             return 'Der Auftrag ist nicht aktiv.';
         }
         if ( self::next_stage( $current ) !== $target ) {
             return 'Dieser Workflow-Schritt ist aktuell nicht zulässig.';
+        }
+        if ( 'quote_accepted' === $target ) {
+            return 'Das Angebot muss ausdrücklich angenommen oder abgelehnt werden.';
         }
         if ( in_array( $target, array( 'deposit_invoice_sent', 'deposit_paid', 'final_invoice_sent', 'final_paid' ), true ) && ! current_user_can( 'ambra_manage_finance' ) ) {
             return 'Für diesen Finanzschritt fehlt die Berechtigung.';
@@ -139,6 +218,13 @@ final class Workflow {
         check_admin_referer( 'ambra_workflow_' . $project_id );
 
         $redirect = Pages::get_url( 'projects', array( 'id' => $project_id ) );
+        $current  = (string) Utils::field( 'ambra_project_stage', $project_id, 'inquiry' );
+        $state    = (string) Utils::field( 'ambra_project_state', $project_id, 'active' );
+        $context  = self::validate_project_action_context( $state, $current, $action );
+
+        if ( true !== $context ) {
+            self::redirect_message( $redirect, 'danger', $context );
+        }
 
         if ( in_array( $action, array( 'cancel', 'reject_quote' ), true ) ) {
             $reason = isset( $_POST['reason'] ) ? sanitize_textarea_field( wp_unslash( $_POST['reason'] ) ) : '';
@@ -158,11 +244,6 @@ final class Workflow {
         }
 
         if ( 'accept_quote' === $action ) {
-            $current = (string) Utils::field( 'ambra_project_stage', $project_id, 'inquiry' );
-            if ( 'quote_sent' !== $current ) {
-                self::redirect_message( $redirect, 'danger', 'Das Angebot kann aktuell nicht angenommen werden.' );
-            }
-
             Utils::update_field( 'ambra_quote_decision', 'accepted', $project_id );
             Utils::update_field( 'ambra_quote_decision_at', current_time( 'mysql' ), $project_id );
             Utils::update_field( 'ambra_project_stage', 'quote_accepted', $project_id );
@@ -170,7 +251,6 @@ final class Workflow {
         }
 
         if ( 'advance' === $action ) {
-            $current = (string) Utils::field( 'ambra_project_stage', $project_id, 'inquiry' );
             $target  = self::next_stage( $current );
             if ( ! $target ) {
                 self::redirect_message( $redirect, 'danger', 'Kein weiterer Schritt verfügbar.' );
@@ -239,17 +319,14 @@ final class Workflow {
         }
         check_admin_referer( 'ambra_position_' . $position_id );
 
-        $project_id = Utils::relation_id( Utils::field( 'ambra_position_project', $position_id ) );
-        $redirect   = Pages::get_url( 'positions', array( 'edit' => $position_id, 'project' => $project_id ) );
-        $status     = (string) Utils::field( 'ambra_position_status', $position_id, 'recorded' );
+        $project_id    = Utils::relation_id( Utils::field( 'ambra_position_project', $position_id ) );
+        $redirect      = Pages::get_url( 'positions', array( 'edit' => $position_id, 'project' => $project_id ) );
+        $status        = (string) Utils::field( 'ambra_position_status', $position_id, 'recorded' );
+        $project_state = $project_id ? (string) Utils::field( 'ambra_project_state', $project_id, 'active' ) : '';
+        $project_stage = $project_id ? (string) Utils::field( 'ambra_project_stage', $project_id, 'inquiry' ) : '';
+        $allowed       = self::position_actions( $project_state, $project_stage, $status );
 
-        $allowed = array(
-            'mark_delivered' => array( 'from' => array( 'ordered' ), 'to' => 'delivered' ),
-            'mark_installed' => array( 'from' => array( 'delivered' ), 'to' => 'installed' ),
-            'cancel'         => array( 'from' => array( 'recorded', 'calculated' ), 'to' => 'cancelled' ),
-        );
-
-        if ( ! isset( $allowed[ $action ] ) || ! in_array( $status, $allowed[ $action ]['from'], true ) ) {
+        if ( ! isset( $allowed[ $action ] ) ) {
             self::redirect_message( $redirect, 'danger', 'Diese Positionsaktion ist aktuell nicht zulässig.' );
         }
 

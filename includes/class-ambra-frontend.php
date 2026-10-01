@@ -515,27 +515,22 @@ final class Frontend {
     }
 
     private static function render_position_actions( int $position_id ): void {
-        $status  = (string) Utils::field( 'ambra_position_status', $position_id, 'recorded' );
-        $actions = array();
-        if ( 'ordered' === $status ) {
-            $actions['mark_delivered'] = 'Als geliefert markieren';
-        }
-        if ( 'delivered' === $status ) {
-            $actions['mark_installed'] = 'Als montiert markieren';
-        }
-        if ( in_array( $status, array( 'recorded', 'calculated' ), true ) ) {
-            $actions['cancel'] = 'Position stornieren';
-        }
+        $status        = (string) Utils::field( 'ambra_position_status', $position_id, 'recorded' );
+        $project_id    = Utils::relation_id( Utils::field( 'ambra_position_project', $position_id ) );
+        $project_state = $project_id ? (string) Utils::field( 'ambra_project_state', $project_id, 'active' ) : '';
+        $project_stage = $project_id ? (string) Utils::field( 'ambra_project_stage', $project_id, 'inquiry' ) : '';
+        $actions       = Workflow::position_actions( $project_state, $project_stage, $status );
+
         if ( ! $actions ) {
             return;
         }
 
         echo '<div class="uk-card uk-card-default uk-card-body uk-margin-large-top"><h2 class="uk-card-title">Positionsstatus</h2><div class="uk-flex uk-flex-wrap uk-grid-small" uk-grid>';
-        foreach ( $actions as $action => $label ) {
+        foreach ( $actions as $action => $definition ) {
             echo '<div><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">';
             echo '<input type="hidden" name="action" value="ambra_position_action"><input type="hidden" name="position_id" value="' . esc_attr( (string) $position_id ) . '"><input type="hidden" name="position_action" value="' . esc_attr( $action ) . '">';
             wp_nonce_field( 'ambra_position_' . $position_id );
-            echo '<button class="uk-button uk-button-default" type="submit">' . esc_html( $label ) . '</button></form></div>';
+            echo '<button class="uk-button uk-button-default" type="submit">' . esc_html( (string) $definition['label'] ) . '</button></form></div>';
         }
         echo '</div></div>';
     }
