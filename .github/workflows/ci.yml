@@ -77,3 +77,5 @@ jobs:
         run: php tests/compatibility-contract.php
       - name: Verify replaceable UIkit provider boundary
         run: php tests/uikit-provider-contract.php
+      - name: Verify replaceable product identity boundary
+        run: php tests/product-identity-contract.php

@@ -12,8 +12,8 @@ final class Admin {
 
     public static function menu(): void {
         add_menu_page(
-            'AMBRA Projektmanagement',
-            'AMBRA',
+            Identity::name(),
+            Identity::short_name(),
             'ambra_manage_settings',
             'ambra-project-management',
             array( __CLASS__, 'render' ),
@@ -34,7 +34,7 @@ final class Admin {
         if ( ! current_user_can( 'activate_plugins' ) || ACF_Integration::is_ready() ) {
             return;
         }
-        echo '<div class="notice notice-error"><p><strong>AMBRA Projektmanagement:</strong> ACF Pro ist erforderlich. Bitte ACF Pro installieren und aktivieren.</p></div>';
+        echo '<div class="notice notice-error"><p><strong>' . esc_html( Identity::name() ) . ':</strong> ACF Pro ist erforderlich. Bitte ACF Pro installieren und aktivieren.</p></div>';
     }
 
     public static function action_links( array $links ): array {
@@ -59,7 +59,7 @@ final class Admin {
             ? 'Erkannt: ' . (string) $uikit_info['label']
             : 'Kein Provider automatisch erkannt – YOOtheme Pro wird nativ erkannt; andere UIkit-Provider können sich registrieren.';
 
-        echo '<div class="wrap"><h1>AMBRA Projektmanagement</h1>';
+        echo '<div class="wrap"><h1>' . esc_html( Identity::name() ) . '</h1>';
         echo '<p>Die operative Auftragsabwicklung findet im geschützten Frontend statt. Nur Administratoren können das WordPress-Backend öffnen.</p>';
 
         if ( isset( $_GET['pages'] ) && 'repaired' === $_GET['pages'] ) {
@@ -88,26 +88,26 @@ final class Admin {
         echo '<p><strong>Login-URL:</strong> <code>' . esc_html( Pages::get_url( 'login' ) ) . '</code> – zum Testen in einem privaten Browserfenster öffnen.</p>';
 
         echo '<h2>Seiten prüfen und Startseite reparieren</h2>';
-        echo '<p>Fehlende Systemseiten einschließlich der Loginseite werden erstellt. Alle AMBRA-Seiten werden auf die oberste Seitenebene gesetzt. Bestehende Seiteninhalte und YOOtheme-Layouts werden nicht überschrieben. Die Dashboardseite wird als statische Startseite gesetzt.</p>';
+        echo '<p>Fehlende Systemseiten einschließlich der Loginseite werden erstellt. Alle verwalteten Systemseiten werden auf die oberste Seitenebene gesetzt. Bestehende Seiteninhalte und YOOtheme-Layouts werden nicht überschrieben. Die Dashboardseite wird als statische Startseite gesetzt.</p>';
         echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="ambra_repair_pages">';
         wp_nonce_field( 'ambra_repair_pages' );
         submit_button( 'Seiten prüfen / reparieren', 'secondary', 'submit', false );
         echo '</form>';
 
         echo '<h2>Beispieldaten</h2>';
-        echo '<p>Die Datensätze sind mit „Beispiel“ gekennzeichnet. Beim Neuerstellen werden ausschließlich bisherige AMBRA-Beispieldaten entfernt; eigene Daten bleiben unangetastet.</p>';
+        echo '<p>Die Datensätze sind mit „Beispiel“ gekennzeichnet. Beim Neuerstellen werden ausschließlich bisherige Plugin-Beispieldaten entfernt; eigene Daten bleiben unangetastet.</p>';
         echo '<div style="display:flex;gap:10px;align-items:center">';
         echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="ambra_seed_demo">';
         wp_nonce_field( 'ambra_seed_demo' );
         submit_button( 'Beispieldaten neu anlegen', 'secondary', 'submit', false );
         echo '</form>';
-        echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" onsubmit="return confirm(\'Alle AMBRA-Beispieldaten löschen? Eigene Daten bleiben erhalten.\')"><input type="hidden" name="action" value="ambra_delete_demo">';
+        echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" onsubmit="return confirm(\'Alle Plugin-Beispieldaten löschen? Eigene Daten bleiben erhalten.\')"><input type="hidden" name="action" value="ambra_delete_demo">';
         wp_nonce_field( 'ambra_delete_demo' );
         submit_button( 'Beispieldaten löschen', 'delete', 'submit', false );
         echo '</form></div>';
 
         echo '<h2>UIkit und Navigation</h2>';
-        echo '<p>Das Plugin gibt bewusst keine eigene obere Menüleiste aus. Lege die Navigation als WordPress-Menü an und veröffentliche sie über das aktive Theme oder den verwendeten Builder. In der bestehenden AMBRA-Installation stellt YOOtheme Pro UIkit und die Navigation bereit. Andere UIkit-Provider können sich über <code>ambra_pm_uikit_provider_info</code> im Systemstatus registrieren.</p>';
+        echo '<p>Das Plugin gibt bewusst keine eigene obere Menüleiste aus. Lege die Navigation als WordPress-Menü an und veröffentliche sie über das aktive Theme oder den verwendeten Builder. In der bestehenden Installation stellt YOOtheme Pro UIkit und die Navigation bereit. Andere UIkit-Provider können sich über <code>ambra_pm_uikit_provider_info</code> im Systemstatus registrieren.</p>';
         echo '<table class="widefat striped" style="max-width:1000px"><thead><tr><th>Bereich</th><th>Seite</th><th>Shortcode</th></tr></thead><tbody>';
         foreach ( Pages::definitions() as $key => $definition ) {
             $page_id = Pages::get_id( $key );
@@ -125,7 +125,7 @@ final class Admin {
         echo '<p>Beim Anlegen eines Teammitglieds wird der WordPress-Benutzer automatisch über die E-Mail-Adresse erzeugt oder verknüpft. Wird im Backend ein Benutzer mit der Rolle <strong>Projektmitarbeiter</strong> angelegt, entsteht umgekehrt automatisch der Team-Datensatz.</p>';
 
         echo '<h2>Hinweis zu Fotos und PDFs</h2>';
-        echo '<p>Seiten, REST-Zugriffe und das AMBRA-Backend sind geschützt. Direkte URLs zu Dateien unter <code>wp-content/uploads</code> werden jedoch vom Webserver ausgeliefert. Für vollständig private Kundenfotos und PDFs ist zusätzlich eine hostingabhängige Apache-/Nginx-Regel oder eine Private-Media-Lösung erforderlich.</p>';
+        echo '<p>Seiten, REST-Zugriffe und die geschützte Anwendung sind abgesichert. Direkte URLs zu Dateien unter <code>wp-content/uploads</code> werden jedoch vom Webserver ausgeliefert. Für vollständig private Kundenfotos und PDFs ist zusätzlich eine hostingabhängige Apache-/Nginx-Regel oder eine Private-Media-Lösung erforderlich.</p>';
         echo '</div>';
     }
 

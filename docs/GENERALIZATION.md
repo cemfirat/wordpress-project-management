@@ -77,3 +77,12 @@ ACF exports and runtime code contain persisted `ambra_*` field names and `field_
 - Generalization roadmap: issue #5.
 - Branch CI must be green before any pull request is opened.
 - Shared WordPress blueprint enrollment remains paused until license/identity metadata are explicit.
+
+
+## Product identity boundary
+
+User-facing product naming is separated from persisted storage identity.
+
+`Identity::info()` keeps the current AMBRA labels as defaults and exposes the `ambra_pm_product_identity` filter for a future neutral product name. Changing those labels does not rename custom post types, options, ACF keys, capabilities, shortcodes or other persisted compatibility identifiers.
+
+The plugin header, main filename and text domain remain compatibility decisions for a later major-version boundary.
