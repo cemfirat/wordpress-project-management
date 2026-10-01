@@ -83,6 +83,8 @@ jobs:
         run: php tests/demo-profile-contract.php
       - name: Verify workflow transition invariants
         run: php tests/workflow-invariants-contract.php
+      - name: Verify project numbering boundary
+        run: php tests/project-numbering-contract.php
 
 
   package:
