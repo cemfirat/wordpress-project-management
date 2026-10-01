@@ -79,3 +79,5 @@ jobs:
         run: php tests/uikit-provider-contract.php
       - name: Verify replaceable branding boundary
         run: php tests/branding-contract.php
+      - name: Verify replaceable demo seed boundary
+        run: php tests/demo-seed-contract.php
