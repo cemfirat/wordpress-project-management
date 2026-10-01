@@ -26,7 +26,7 @@ Geschlossene, frontend-basierte WordPress-Anwendung für AMBRA mit eigener UIkit
 - WordPress 6.5 oder neuer
 - PHP 8.0 oder neuer
 - ACF Pro
-- YOOtheme Pro empfohlen und für das vollständige UIkit-Design vorgesehen
+- UIkit-Provider für das vollständige Frontend-Design; YOOtheme Pro ist der aktuell automatisch erkannte AMBRA-Provider
 
 ## Update
 
@@ -53,9 +53,11 @@ Beim ersten Aufruf nach dem Update erstellt die Migration die fehlende Loginseit
 7. Anmeldung testen und kontrollieren, dass danach das Dashboard erscheint.
 8. „Passwort vergessen?“ testen und den E-Mail-Versand der Installation kontrollieren.
 
-## YOOtheme-Anpassung
+## UIkit und YOOtheme
 
-Die Seite **Login** enthält den Shortcode `[ambra_login]`. Das Plugin liefert bereits die vollständige UIkit-Struktur. Du kannst die Seite mit YOOtheme Pro gestalten und den Shortcode in einem Shortcode-Element platzieren. Das Plugin überschreibt vorhandene Seiteninhalte oder YOOtheme-Builder-Daten bei späteren Reparaturen nicht.
+Die Seite **Login** enthält den Shortcode `[ambra_login]`. Das Plugin liefert die vollständige UIkit-Markup-Struktur, bündelt UIkit selbst aber nicht doppelt.
+
+In der bestehenden AMBRA-Installation stellt YOOtheme Pro UIkit bereit und kann die Shortcodes über Shortcode-Elemente integrieren. Die Kernlogik ist jedoch nicht an YOOtheme gebunden; andere UIkit-Provider können denselben UI-Vertrag erfüllen. Bestehende Seiteninhalte oder YOOtheme-Builder-Daten werden bei späteren Reparaturen nicht überschrieben.
 
 ## Private Dateien
 

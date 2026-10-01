@@ -5,7 +5,7 @@
 - **Plugin:** private Anwendung, Frontend-Login, Rollen, Datenmodell, Workflow, Kalkulation, Validierung, Team-/Benutzersynchronisation, Beispieldaten und Frontend-Ausgabe.
 - **WordPress:** Authentifizierung, Auth-Cookies, Passwort-Reset-E-Mails und Benutzerkonten.
 - **ACF Pro:** Feldgruppen, Beziehungen, Medienfelder und Frontend-Formulare.
-- **YOOtheme Pro/UIkit:** Designsystem, responsives Layout, UI-Komponenten und Navigation.
+- **UIkit-Provider:** Designsystem und UI-Komponenten. Die bestehende AMBRA-Installation verwendet YOOtheme Pro; die Geschäftslogik ist nicht an YOOtheme gebunden.
 
 ## Custom Post Types
 
@@ -47,6 +47,14 @@ Das Plugin verwaltet Seiten-IDs statt fester Slugs. Es gibt zehn Systemseiten au
 6. Nach erfolgreicher Prüfung der AMBRA-Berechtigung erfolgt die Weiterleitung zum Dashboard.
 
 Das Plugin speichert keine Passwörter und führt keine eigene Passwortprüfung durch.
+
+## UI-Provider-Grenze
+
+Das Frontend-Markup verwendet UIkit-Klassen und -Attribute. YOOtheme Pro ist der aktuell automatisch erkannte Provider, aber kein Bestandteil des Daten- oder Workflow-Kerns.
+
+`Utils::uikit_provider_info()` kapselt diese Grenze. Andere Integrationen können über `ambra_pm_uikit_provider_info` einen UIkit-Provider melden, ohne bestehende AMBRA-Speicherkennungen oder Geschäftslogik zu verändern.
+
+Das Plugin bündelt derzeit bewusst keine zweite UIkit-Kopie.
 
 ## Update/Migration
 
