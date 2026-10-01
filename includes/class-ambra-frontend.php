@@ -95,7 +95,7 @@ final class Frontend {
             return self::alert( 'Anmeldung erforderlich.', 'danger' );
         }
         if ( ! current_user_can( 'ambra_use_app' ) && ! current_user_can( 'manage_options' ) ) {
-            return self::alert( 'Keine Berechtigung für AMBRA Projektmanagement.', 'danger' );
+            return self::alert( 'Keine Berechtigung für ' . Branding::name() . '.', 'danger' );
         }
         if ( ! ACF_Integration::is_ready() ) {
             return self::alert( 'ACF Pro ist erforderlich und muss aktiviert sein.', 'danger' );
@@ -146,7 +146,7 @@ final class Frontend {
         }
 
         ob_start();
-        echo self::shell_start( 'Dashboard', 'AMBRA Projektmanagement und Auftragsabwicklung' );
+        echo self::shell_start( 'Dashboard', Branding::name() . ' und Auftragsabwicklung' );
         echo '<div class="uk-child-width-1-2@s uk-child-width-1-4@l uk-grid-small uk-grid-match" uk-grid>';
         self::stat_card( 'Aktive Aufträge', self::count_projects_by_state( 'active' ), Pages::get_url( 'projects' ), 'file-text' );
         self::stat_card( 'Angebote offen', self::count_projects_by_stage( 'quote_sent' ), Pages::get_url( 'projects' ), 'mail' );

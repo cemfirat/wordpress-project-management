@@ -286,7 +286,8 @@ final class Login {
         return '</div></div></div></div></section>';
     }
 
-    private static function brand_header( string $title = 'AMBRA', string $subtitle = 'Bitte melde dich an' ): void {
+    private static function brand_header( ?string $title = null, string $subtitle = 'Bitte melde dich an' ): void {
+        $title = null === $title ? Branding::short_name() : $title;
         echo '<div class="uk-text-center uk-margin-medium-bottom">';
         echo '<span uk-icon="icon: lock; ratio: 2.5" class="uk-text-primary"></span>';
         echo '<h2 class="uk-card-title uk-margin-small-top uk-margin-remove-bottom">' . esc_html( $title ) . '</h2>';
@@ -304,7 +305,7 @@ final class Login {
             'empty'       => 'Bitte Benutzername bzw. E-Mail-Adresse und Passwort eingeben.',
             'empty_reset' => 'Bitte Benutzername oder E-Mail-Adresse eingeben.',
             'security'    => 'Die Anmeldung konnte nicht überprüft werden. Bitte lade die Seite neu und versuche es erneut.',
-            'no_access'   => 'Dieses Benutzerkonto hat keinen Zugriff auf AMBRA Projektmanagement.',
+            'no_access'   => 'Dieses Benutzerkonto hat keinen Zugriff auf ' . Branding::name() . '.',
             default       => 'Benutzername bzw. E-Mail-Adresse oder Passwort ist falsch.',
         };
     }

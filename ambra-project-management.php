@@ -17,6 +17,7 @@ define( 'AMBRA_PM_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AMBRA_PM_URL', plugin_dir_url( __FILE__ ) );
 
 require_once AMBRA_PM_DIR . 'includes/class-ambra-utils.php';
+require_once AMBRA_PM_DIR . 'includes/class-ambra-branding.php';
 require_once AMBRA_PM_DIR . 'includes/class-ambra-roles.php';
 require_once AMBRA_PM_DIR . 'includes/class-ambra-post-types.php';
 require_once AMBRA_PM_DIR . 'includes/class-ambra-pages.php';

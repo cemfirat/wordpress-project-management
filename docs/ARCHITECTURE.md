@@ -59,3 +59,16 @@ Das Plugin bündelt derzeit bewusst keine zweite UIkit-Kopie.
 ## Update/Migration
 
 `Plugin::maybe_upgrade()` läuft auch beim Ersetzen eines aktiven Plugins durch ein ZIP-Update. Die Migration ist idempotent, erzeugt keine mehrfachen Seiten und ergänzt in 2.0.2 die Loginseite.
+
+
+## Branding-Grenze
+
+Sichtbare Produktbezeichnungen werden über `Branding` zentralisiert. Die aktuelle Standardidentität bleibt `AMBRA Projektmanagement` / `AMBRA`.
+
+Integrationen können sichtbare Namen über `ambra_pm_branding` anpassen. Das verändert ausdrücklich **nicht**:
+
+- `ambra_*` Custom Post Types, Meta-/ACF-Schlüssel oder Capabilities;
+- Shortcodes und Admin-Post-Actions;
+- Plugin-Dateiname, Text-Domain oder PHP-Namespace.
+
+Damit kann eine spätere universelle Produktidentität getrennt von den historischen Kompatibilitätskennungen eingeführt werden.
