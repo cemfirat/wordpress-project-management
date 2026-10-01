@@ -6,6 +6,10 @@
 
 Geschlossene, frontend-basierte WordPress-Anwendung für AMBRA mit eigener UIkit-Loginseite.
 
+> **Projektstatus:** Dieses Repository wurde aus der AMBRA-Anwendung übernommen und soll langfristig zu einem universell einsetzbaren Projektmanagement-Plugin weiterentwickelt werden. Der aktuelle Runtime-/Datenbestand ist weiterhin AMBRA-spezifisch. Persistierte `ambra_*`-Kennungen werden nicht kosmetisch umbenannt, weil sie bestehende Daten, Rechte, ACF-Felder, Shortcodes und Systemseiten referenzieren. Die sichere Universalisierung wird in [#5](https://github.com/cemfirat/wordpress-project-management/issues/5) geplant.
+
+> **Lizenz-/Distributionsstatus:** Für dieses Repository ist derzeit keine Softwarelizenz deklariert. Es gibt aktuell keinen offiziellen GitHub-Releases-/Self-Update-Kanal; Updates sind in der bestehenden AMBRA-Installation als manuelle ZIP-Ersetzung dokumentiert. Die explizite Lizenz- und spätere Distributionsentscheidung wird in [#4](https://github.com/cemfirat/wordpress-project-management/issues/4) getroffen.
+
 ## Neu in 2.0.2
 
 - Automatisch angelegte Seite **Login** unter `/login/`.
