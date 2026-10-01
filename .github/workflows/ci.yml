@@ -97,3 +97,9 @@ jobs:
           python3 scripts/package.py --output /tmp/ambra-package-b.zip
       - name: Verify deterministic output
         run: cmp -s /tmp/ambra-package-a.zip /tmp/ambra-package-b.zip
+      - name: Refuse release package while changelog is unreleased
+        run: |
+          if python3 scripts/package.py --release --output /tmp/ambra-release.zip; then
+            echo "Expected --release to fail while CHANGELOG.md contains Unreleased entries."
+            exit 1
+          fi

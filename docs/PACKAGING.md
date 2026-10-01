@@ -6,13 +6,21 @@ The repository contains a reproducible local package builder:
 python3 scripts/package.py
 ```
 
-By default this creates:
+By default a repository state with entries under `## Unreleased` creates:
 
 ```text
-dist/ambra-project-management-<version>.zip
+dist/ambra-project-management-<version>-dev.zip
 ```
 
-The version is read from the `Version:` header in `ambra-project-management.php`.
+An official-version package is requested explicitly:
+
+```bash
+python3 scripts/package.py --release
+```
+
+A release build is refused while `CHANGELOG.md` still contains `Unreleased` entries.
+
+The version is read from the `Version:` header in `ambra-project-management.php` and must exactly match the runtime constant `AMBRA_PM_VERSION`. Any mismatch fails the build.
 
 ## Package whitelist
 
@@ -32,6 +40,8 @@ The builder fails when:
 
 - the main plugin file or required runtime directories are missing;
 - the plugin header version cannot be parsed;
+- the plugin header and `AMBRA_PM_VERSION` disagree;
+- `--release` is requested while the changelog still contains Unreleased entries;
 - hidden/development files appear inside a runtime directory;
 - a symlink appears in the package input;
 - the archive contains duplicate, unsafe or out-of-root paths;
@@ -40,7 +50,9 @@ The builder fails when:
 - runtime PHP includes or ACF JSON groups are absent;
 - ZIP CRC validation fails.
 
-CI builds the package twice and compares the resulting bytes. Fixed ZIP timestamps, sorted paths and fixed file modes make the artifact deterministic for identical repository contents.
+CI builds the development package twice and compares the resulting bytes. Fixed ZIP timestamps, sorted paths and fixed file modes make the artifact deterministic for identical repository contents.
+
+CI also verifies that `--release` is blocked while the repository contains Unreleased changelog entries.
 
 ## Distribution boundary
 
