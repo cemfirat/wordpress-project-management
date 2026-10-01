@@ -81,6 +81,8 @@ jobs:
         run: php tests/branding-contract.php
       - name: Verify replaceable demo profile boundary
         run: php tests/demo-profile-contract.php
+      - name: Verify workflow transition invariants
+        run: php tests/workflow-invariants-contract.php
 
 
   package:
