@@ -53,9 +53,11 @@ final class Admin {
         $pages          = (array) get_option( Pages::OPTION, array() );
         $front_page_id  = absint( get_option( 'page_on_front' ) );
         $dashboard_id   = Pages::get_id( 'dashboard' );
-        $yootheme_info  = Utils::yootheme_info();
-        $yootheme       = (bool) $yootheme_info['active'];
-        $yootheme_label = $yootheme ? 'Erkannt: ' . (string) $yootheme_info['label'] : 'Nicht erkannt – aktives Theme und Parent-Theme geprüft';
+        $uikit_info     = Utils::uikit_provider_info();
+        $uikit_active   = (bool) $uikit_info['active'];
+        $uikit_label    = $uikit_active
+            ? 'Erkannt: ' . (string) $uikit_info['label']
+            : 'Kein Provider automatisch erkannt – YOOtheme Pro wird nativ erkannt; andere UIkit-Provider können sich registrieren.';
 
         echo '<div class="wrap"><h1>AMBRA Projektmanagement</h1>';
         echo '<p>Die operative Auftragsabwicklung findet im geschützten Frontend statt. Nur Administratoren können das WordPress-Backend öffnen.</p>';
@@ -72,7 +74,7 @@ final class Admin {
 
         echo '<h2>Systemstatus</h2><table class="widefat striped" style="max-width:1000px"><tbody>';
         self::status_row( 'ACF Pro', ACF_Integration::is_ready(), ACF_Integration::is_ready() ? 'Aktiv' : 'Fehlt oder ist nicht aktiv' );
-        self::status_row( 'YOOtheme Pro / UIkit', $yootheme, $yootheme_label );
+        self::status_row( 'UIkit-Provider', $uikit_active, $uikit_label );
         self::status_row( 'Private Website', '0' === (string) get_option( 'blog_public' ), 'Nicht angemeldete Besucher werden zu /login/ umgeleitet' );
         self::status_row( 'Frontend-Login', Pages::get_id( 'login' ) > 0, Pages::get_id( 'login' ) ? 'Loginseite vorhanden: ' . Pages::get_url( 'login' ) : 'Loginseite fehlt' );
         self::status_row( 'Dashboard als Startseite', $dashboard_id && $front_page_id === $dashboard_id && 'page' === get_option( 'show_on_front' ), $dashboard_id && $front_page_id === $dashboard_id ? 'Aktiv' : 'Nicht korrekt gesetzt' );
@@ -104,8 +106,8 @@ final class Admin {
         submit_button( 'Beispieldaten löschen', 'delete', 'submit', false );
         echo '</form></div>';
 
-        echo '<h2>YOOtheme Pro und Navigation</h2>';
-        echo '<p>Das Plugin gibt bewusst keine eigene obere Menüleiste mehr aus. Lege die Navigation selbst als WordPress-Menü an und veröffentliche sie über YOOtheme Pro. Die Shortcodes können in YOOtheme über ein Shortcode-Element platziert werden.</p>';
+        echo '<h2>UIkit und Navigation</h2>';
+        echo '<p>Das Plugin gibt bewusst keine eigene obere Menüleiste aus. Lege die Navigation als WordPress-Menü an und veröffentliche sie über das aktive Theme oder den verwendeten Builder. In der bestehenden AMBRA-Installation stellt YOOtheme Pro UIkit und die Navigation bereit. Andere UIkit-Provider können sich über <code>ambra_pm_uikit_provider_info</code> im Systemstatus registrieren.</p>';
         echo '<table class="widefat striped" style="max-width:1000px"><thead><tr><th>Bereich</th><th>Seite</th><th>Shortcode</th></tr></thead><tbody>';
         foreach ( Pages::definitions() as $key => $definition ) {
             $page_id = Pages::get_id( $key );

@@ -75,3 +75,5 @@ jobs:
           coverage: none
       - name: Verify persisted compatibility identifiers
         run: php tests/compatibility-contract.php
+      - name: Verify replaceable UIkit provider boundary
+        run: php tests/uikit-provider-contract.php

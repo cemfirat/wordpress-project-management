@@ -10,7 +10,7 @@
 - Login, Dashboard, Aufträge, Kunden, Besichtigungen, Auftragspositionen, Hersteller, Lieferanten, Produkt-Blueprints und Team liegen auf derselben obersten Seitenebene.
 - Nur Administratoren mit `manage_options` dürfen das WordPress-Backend verwenden.
 - Projektmitarbeiter arbeiten ausschließlich im Frontend und sehen keine WordPress-Adminleiste.
-- Navigation wird in WordPress/YOOtheme erstellt; das Plugin gibt keine eigene Hauptnavigation aus.
+- Navigation wird als WordPress-Menü über das aktive Theme oder den verwendeten Builder ausgegeben; das Plugin gibt keine eigene Hauptnavigation aus.
 
 ## Login
 
@@ -25,7 +25,7 @@
 
 - Die Plugin-Ausgabe verwendet UIkit-Komponenten und deren `uk-*` Klassen/Attribute.
 - Die Loginseite verwendet unter anderem `uk-section`, `uk-flex`, `uk-height-viewport`, `uk-background-secondary`, `uk-form-*`, `uk-input`, `uk-checkbox`, `uk-button` und `uk-icon`.
-- YOOtheme Pro stellt das UIkit-CSS und -JavaScript bereit.
+- Ein UIkit-Provider stellt das UIkit-CSS und -JavaScript bereit. In der bestehenden AMBRA-Installation übernimmt das YOOtheme Pro; andere Provider sind über die Provider-Abstraktion möglich.
 - Tabellen sind responsiv, ACF-Formulare werden im Browser mit UIkit-Klassen ergänzt.
 
 ## Team und Benutzer

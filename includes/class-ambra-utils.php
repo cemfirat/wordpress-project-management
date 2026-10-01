@@ -161,6 +161,56 @@ final class Utils {
         }
     }
 
+
+    /**
+     * Report the UIkit provider used by the frontend.
+     *
+     * YOOtheme Pro remains the automatically detected provider for the current
+     * AMBRA installation. Other integrations can declare an equivalent provider
+     * through the ambra_pm_uikit_provider_info filter without coupling the core
+     * application to a specific theme or builder.
+     *
+     * @return array{active:bool,provider:string,label:string,signals:array<int,string>}
+     */
+    public static function uikit_provider_info(): array {
+        $yootheme = self::yootheme_info();
+
+        $info = array(
+            'active'   => (bool) $yootheme['active'],
+            'provider' => $yootheme['active'] ? 'yootheme' : 'none',
+            'label'    => $yootheme['active'] ? (string) $yootheme['label'] : 'Kein UIkit-Provider automatisch erkannt',
+            'signals'  => (array) $yootheme['signals'],
+        );
+
+        if ( function_exists( 'apply_filters' ) ) {
+            $filtered = apply_filters( 'ambra_pm_uikit_provider_info', $info );
+            if ( is_array( $filtered ) ) {
+                $info = array_merge( $info, $filtered );
+            }
+        }
+
+        $info['active']   = (bool) ( $info['active'] ?? false );
+        $info['provider'] = trim( (string) ( $info['provider'] ?? '' ) );
+        $info['label']    = trim( (string) ( $info['label'] ?? '' ) );
+        $info['signals']  = array_values(
+            array_filter(
+                array_map(
+                    static fn( $signal ): string => trim( (string) $signal ),
+                    is_array( $info['signals'] ?? null ) ? $info['signals'] : array()
+                )
+            )
+        );
+
+        if ( '' === $info['provider'] ) {
+            $info['provider'] = $info['active'] ? 'custom' : 'none';
+        }
+        if ( '' === $info['label'] ) {
+            $info['label'] = $info['active'] ? 'UIkit-Provider' : 'Kein UIkit-Provider automatisch erkannt';
+        }
+
+        return $info;
+    }
+
     public static function current_user_is_admin(): bool {
         return is_user_logged_in() && current_user_can( 'manage_options' );
     }
