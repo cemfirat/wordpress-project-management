@@ -89,3 +89,15 @@ The first user-facing decoupling layer is intentionally non-destructive:
 - legacy `ambra_*` persistence/API identifiers remain unchanged.
 
 This is the preferred pattern for further visible neutralization: configurable presentation first, storage migration only when technically justified.
+
+
+## Demo profile boundary
+
+Industry-specific example content is separated from demo lifecycle and cleanup.
+
+- `Demo_Data` owns seed lifecycle, cleanup, the stable `_ambra_pm_demo` marker and record synchronization.
+- `Demo_Profile` contains the existing AMBRA/sun-protection sample dataset.
+- `ambra_pm_demo_seed_callback` can replace the default profile for another industry or integration.
+- Custom profiles can create marked records through `Demo_Data::create_record()` while keeping the legacy storage schema stable.
+
+This allows the reusable core to stop owning sun-protection sample content without changing existing AMBRA demo behavior.
