@@ -65,7 +65,7 @@ ACF exports and runtime code contain persisted `ambra_*` field names and `field_
 
 1. Decide the neutral product/plugin identity.
 2. Keep legacy storage identifiers unchanged by default.
-3. Move AMBRA-specific labels/defaults/demo data behind configuration where practical.
+3. Move AMBRA-specific labels/defaults/demo data behind configuration where practical. Visible product naming now has a dedicated `Branding` boundary; demo content remains a separate follow-up.
 4. Add neutral user-facing wording.
 5. Add neutral aliases only where a public developer-facing API benefits from them.
 6. Add compatibility tests before any identifier migration.
@@ -77,3 +77,15 @@ ACF exports and runtime code contain persisted `ambra_*` field names and `field_
 - Generalization roadmap: issue #5.
 - Branch CI must be green before any pull request is opened.
 - Shared WordPress blueprint enrollment remains paused until license/identity metadata are explicit.
+
+
+## Branding boundary
+
+The first user-facing decoupling layer is intentionally non-destructive:
+
+- default product name remains `AMBRA Projektmanagement`;
+- default short name remains `AMBRA`;
+- `ambra_pm_branding` may override visible product wording;
+- legacy `ambra_*` persistence/API identifiers remain unchanged.
+
+This is the preferred pattern for further visible neutralization: configurable presentation first, storage migration only when technically justified.
