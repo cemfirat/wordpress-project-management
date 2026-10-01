@@ -13,7 +13,7 @@ final class Demo_Data {
     }
 
     public static function seed_once(): void {
-        if ( ! ACF_Integration::is_ready() || get_option( self::OPTION ) ) {
+        if ( ! ACF_Integration::is_ready() || get_option( self::OPTION ) || ! self::automatic_seed_enabled() ) {
             return;
         }
 
@@ -34,7 +34,29 @@ final class Demo_Data {
         update_option( self::OPTION, '1', false );
     }
 
+    public static function automatic_seed_enabled(): bool {
+        $enabled = true;
+        if ( function_exists( 'apply_filters' ) ) {
+            $enabled = (bool) apply_filters( 'ambra_pm_demo_auto_seed', $enabled );
+        }
+        return $enabled;
+    }
+
     public static function seed(): array {
+        $callback = null;
+        if ( function_exists( 'apply_filters' ) ) {
+            $callback = apply_filters( 'ambra_pm_demo_seed_callback', null );
+        }
+
+        if ( is_callable( $callback ) ) {
+            $result = call_user_func( $callback );
+            return is_array( $result ) ? $result : array();
+        }
+
+        return self::seed_default();
+    }
+
+    private static function seed_default(): array {
         $author = get_current_user_id();
         if ( ! $author ) {
             $admins = get_users( array( 'role' => 'administrator', 'number' => 1, 'fields' => 'ids' ) );

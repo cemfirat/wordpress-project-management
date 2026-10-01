@@ -65,7 +65,7 @@ ACF exports and runtime code contain persisted `ambra_*` field names and `field_
 
 1. Decide the neutral product/plugin identity.
 2. Keep legacy storage identifiers unchanged by default.
-3. Move AMBRA-specific labels/defaults/demo data behind configuration where practical. Visible product naming now has a dedicated `Branding` boundary; demo content remains a separate follow-up.
+3. Move AMBRA-specific labels/defaults/demo data behind configuration where practical. Visible product naming has a dedicated `Branding` boundary. The built-in AMBRA demo dataset now also has an explicit seed boundary so other installations can disable automatic seeding or provide a replacement dataset without touching the legacy data schema.
 4. Add neutral user-facing wording.
 5. Add neutral aliases only where a public developer-facing API benefits from them.
 6. Add compatibility tests before any identifier migration.
@@ -89,3 +89,17 @@ The first user-facing decoupling layer is intentionally non-destructive:
 - legacy `ambra_*` persistence/API identifiers remain unchanged.
 
 This is the preferred pattern for further visible neutralization: configurable presentation first, storage migration only when technically justified.
+
+
+## Demo-data boundary
+
+The existing AMBRA demo dataset remains the default for backward compatibility, including the current sun-protection examples.
+
+Universal installations can now:
+
+- disable automatic demo seeding with `ambra_pm_demo_auto_seed`;
+- replace the built-in demo seed operation with a callable returned by `ambra_pm_demo_seed_callback`.
+
+A replacement seed callback is responsible for creating its own records. If those records should participate in the built-in demo count/delete lifecycle, it must mark them with `_ambra_pm_demo = 1`.
+
+This avoids hard-coding a future universal product to the current AMBRA demo catalog while preserving today's behavior by default.

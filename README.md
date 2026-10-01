@@ -59,6 +59,12 @@ Die Seite **Login** enthält den Shortcode `[ambra_login]`. Das Plugin liefert d
 
 In der bestehenden AMBRA-Installation stellt YOOtheme Pro UIkit bereit und kann die Shortcodes über Shortcode-Elemente integrieren. Die Kernlogik ist jedoch nicht an YOOtheme gebunden; andere UIkit-Provider können denselben UI-Vertrag erfüllen. Bestehende Seiteninhalte oder YOOtheme-Builder-Daten werden bei späteren Reparaturen nicht überschrieben.
 
+## Beispieldaten und Universalisierung
+
+Die mitgelieferten Beispieldaten bleiben standardmäßig auf den bestehenden AMBRA-/Sonnenschutz-Workflow abgestimmt, damit aktuelle Installationen beim Update ihr gewohntes Verhalten behalten.
+
+Für eine andere Installation kann die automatische Demo-Erzeugung über `ambra_pm_demo_auto_seed` deaktiviert oder der Seed-Vorgang über `ambra_pm_demo_seed_callback` vollständig ersetzt werden. Persistierte `ambra_*`-Datenkennungen werden dadurch nicht verändert.
+
 ## Private Dateien
 
 Die WordPress-Anwendung selbst ist geschützt. Direkte Dateiadressen im normalen WordPress-Uploadordner benötigen für vollständigen Zugriffsschutz zusätzlich eine hostingabhängige Serverregel oder eine Private-Media-Lösung. Details stehen in `docs/SECURITY.md`.
