@@ -28,7 +28,10 @@
 - Eindeutigkeit aller ACF Field Keys
 - Prüfung der zehn Seitendefinitionen einschließlich Login
 - Suche nach veralteter Versionsnummer in ausführbarem Plugin-Code
-- ZIP nach dem Packen erneut entpackt und geprüft
+- reproduzierbarer ZIP-Build über `scripts/package.py`
+- Paketinhalt per Whitelist auf Runtime-Dateien begrenzt
+- ZIP-Struktur, Plugin-Version, CRC und verbotene Entwicklungsordner automatisch geprüft
+- deterministischer Doppel-Build in CI per Bytevergleich geprüft
 
 ## Laufzeithinweis
 

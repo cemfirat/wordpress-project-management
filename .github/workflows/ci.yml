@@ -81,3 +81,17 @@ jobs:
         run: php tests/branding-contract.php
       - name: Verify replaceable demo profile boundary
         run: php tests/demo-profile-contract.php
+
+
+  package:
+    name: Plugin package smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build verified package twice
+        run: |
+          python3 scripts/package.py --output /tmp/ambra-package-a.zip
+          python3 scripts/package.py --output /tmp/ambra-package-b.zip
+      - name: Verify deterministic output
+        run: cmp -s /tmp/ambra-package-a.zip /tmp/ambra-package-b.zip
