@@ -119,8 +119,23 @@ final class Records {
         }
     }
 
-    private static function project_number( int $post_id ): string {
-        return sprintf( 'AMB-%s-%06d', wp_date( 'Y' ), $post_id );
+    public static function project_number( int $post_id ): string {
+        $year    = (string) wp_date( 'Y' );
+        $default = sprintf( 'AMB-%s-%06d', $year, $post_id );
+        $number  = $default;
+
+        if ( function_exists( 'apply_filters' ) ) {
+            $filtered = apply_filters( 'ambra_pm_project_number', $default, $post_id, $year );
+            if ( is_string( $filtered ) || is_numeric( $filtered ) ) {
+                $number = trim( (string) $filtered );
+            }
+        }
+
+        if ( function_exists( 'sanitize_text_field' ) ) {
+            $number = sanitize_text_field( $number );
+        }
+
+        return '' !== trim( $number ) ? $number : $default;
     }
 
     private static function next_position_number( int $project_id, int $exclude_id ): int {

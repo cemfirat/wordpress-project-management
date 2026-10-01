@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Auftragsnummern für neue Projekte über `ambra_pm_project_number` konfigurierbar gemacht; bestehende Nummern und der Default `AMB-YYYY-######` bleiben unverändert.
 - Server-seitige Workflow-Invarianten gehärtet: Angebotsannahme/-ablehnung kann nicht über generische Workflow-Requests umgangen werden; Positionsstornierungen nach Angebotsversand werden blockiert.
 - Sichtbare Produktbezeichnung über eine zentrale Branding-Grenze von historischen `ambra_*` Speicher-/API-Kennungen getrennt.
 - UIkit-Provider von YOOtheme Pro entkoppelt; YOOtheme bleibt der automatisch erkannte Standard-Provider.

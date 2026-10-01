@@ -101,3 +101,22 @@ Industry-specific example content is separated from demo lifecycle and cleanup.
 - Custom profiles can create marked records through `Demo_Data::create_record()` while keeping the legacy storage schema stable.
 
 This allows the reusable core to stop owning sun-protection sample content without changing existing AMBRA demo behavior.
+
+
+## Project numbering boundary
+
+The historical project-number format remains the default:
+
+`AMB-YYYY-######`
+
+New project numbers are generated through `Records::project_number()` and can be customized with the `ambra_pm_project_number` filter.
+
+The filter receives:
+
+1. the default number;
+2. the project post ID;
+3. the current four-digit year.
+
+Existing project numbers are not recalculated because `Records::sync_record()` generates a number only when `ambra_project_number` is empty.
+
+This keeps the existing AMBRA installation stable while allowing a future universal product or customer-specific implementation to use its own numbering convention without renaming storage fields.
