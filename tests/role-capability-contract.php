@@ -45,12 +45,6 @@ function assert_has_cap(Test_Role $role, string $cap, string $role_name): void {
     }
 }
 
-function assert_lacks_cap(Test_Role $role, string $cap, string $role_name): void {
-    if (!empty($role->caps[$cap])) {
-        fail_role_contract("{$role_name} unexpectedly has sensitive capability {$cap}.");
-    }
-}
-
 \AMBRA_PM\Roles::register_roles_and_caps();
 // Registration must remain safe to run again during upgrades.
 \AMBRA_PM\Roles::register_roles_and_caps();
@@ -65,36 +59,40 @@ if (!$admin instanceof Test_Role) {
     fail_role_contract('administrator role disappeared.');
 }
 
-foreach (array(
+// Keep the permitted policy independent of the production capability builders.
+// Any additional granted capability must be explicitly reviewed in this contract.
+$expected_member_caps = array(
     'read',
     'upload_files',
     'ambra_use_app',
     'edit_ambra_record',
     'read_ambra_record',
+    'delete_ambra_record',
     'edit_ambra_records',
+    'edit_others_ambra_records',
+    'publish_ambra_records',
     'read_private_ambra_records',
+    'delete_ambra_records',
+    'delete_private_ambra_records',
+    'delete_published_ambra_records',
+    'delete_others_ambra_records',
+    'edit_private_ambra_records',
+    'edit_published_ambra_records',
+    'create_ambra_records',
     'read_ambra_catalog',
     'read_private_ambra_catalogs',
     'read_ambra_team_member',
     'read_private_ambra_team_members',
-) as $cap) {
+);
+
+foreach ($expected_member_caps as $cap) {
     assert_has_cap($member, $cap, 'project_team_member');
 }
 
-foreach (array(
-    'ambra_manage_settings',
-    'ambra_view_internal_prices',
-    'ambra_manage_finance',
-    'edit_ambra_catalog',
-    'edit_ambra_catalogs',
-    'publish_ambra_catalogs',
-    'delete_ambra_catalogs',
-    'edit_ambra_team_member',
-    'edit_ambra_team_members',
-    'publish_ambra_team_members',
-    'delete_ambra_team_members',
-) as $cap) {
-    assert_lacks_cap($member, $cap, 'project_team_member');
+foreach ($member->caps as $cap => $granted) {
+    if ($granted && !in_array($cap, $expected_member_caps, true)) {
+        fail_role_contract("project_team_member unexpectedly has unapproved capability {$cap}.");
+    }
 }
 
 foreach (array(
