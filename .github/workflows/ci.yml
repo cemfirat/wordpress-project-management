@@ -85,6 +85,8 @@ jobs:
         run: php tests/workflow-invariants-contract.php
       - name: Verify project numbering boundary
         run: php tests/project-numbering-contract.php
+      - name: Verify role capability boundary
+        run: php tests/role-capability-contract.php
 
 
   package:

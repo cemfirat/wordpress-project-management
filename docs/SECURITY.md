@@ -13,6 +13,27 @@
 - Jede schreibende Plugin-Aktion prüft Nonce, Datensatztyp und Capability.
 - Interne Preise und Finanzfelder sind nur mit den entsprechenden AMBRA-Capabilities sichtbar.
 
+## Rollen- und Capability-Grenze
+
+Die Rolle `project_team_member` ist für die operative Arbeit im geschützten Frontend vorgesehen.
+
+Sie erhält:
+
+- Zugriff auf die Anwendung über `ambra_use_app`;
+- operative AMBRA-Record-Capabilities;
+- Leserechte auf Katalog- und Teamdaten;
+- `upload_files` für die benötigten Medien-Workflows.
+
+Sie erhält ausdrücklich **nicht**:
+
+- `ambra_manage_settings`;
+- `ambra_view_internal_prices`;
+- `ambra_manage_finance`;
+- Katalog-Schreib-/Löschrechte;
+- Team-Schreib-/Löschrechte.
+
+Administratoren erhalten diese erweiterten Capabilities. Ein eigener CI-Contract prüft diese Grenze anhand der tatsächlichen Rollenregistrierung, damit spätere Rollenänderungen keine unbemerkte Rechteausweitung verursachen.
+
 ## Klassische WordPress-Endpunkte
 
 Normale sichtbare Aufrufe der klassischen Loginseite und der klassischen Passwort-vergessen-Ansicht werden zu `/login/` geleitet. WordPress-Endpunkte für Abmeldung und die Verarbeitung eines Passwort-Reset-Schlüssels bleiben technisch verfügbar, weil WordPress diese für sichere Sitzungs- und Passwortfunktionen benötigt.
